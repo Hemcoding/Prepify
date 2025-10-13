@@ -4,11 +4,12 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Dashboard from "./pages/Home/Dashboard";
-import { InterviewPrep } from "./pages/InterviewPrep/InterviewPrep";
+import InterviewPrep from "./pages/InterviewPrep/InterviewPrep";
 import { Toaster } from "react-hot-toast";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import UserProvider from "./context/userContext";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const App = () => {
   return (
@@ -21,7 +22,22 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/interview-prep/:sessionId"
+              element={
+                <ProtectedRoute>
+                  <InterviewPrep />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/interviewprep/:sessionId"
               element={<InterviewPrep />}

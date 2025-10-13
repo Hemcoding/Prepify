@@ -60,12 +60,22 @@ const generateConceptExplaination = AsyncHandler(async (req, res) => {
 
   const prompt = conceptExplainPrompt(question);
 
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash-lite",
-    contents: prompt,
-  });
+  // const response = await ai.models.generateContent({
+  //   model: "gemini-2.0-flash-lite",
+  //   contents: prompt,
+  // });
 
-  let rawText = response.text;
+  const model = ai.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+
+  const response = await model.generateContent(prompt);
+
+  console.log(response.text)
+
+   let rawText = response?.response?.text();
+
+  if (!rawText) {
+    throw CreateApiError(500, "AI did not return any text");
+  }
 
   const cleanedText = rawText
     .replace(/^```json\s*/, "")

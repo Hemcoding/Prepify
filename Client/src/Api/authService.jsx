@@ -1,4 +1,12 @@
-import api from "./Axios";
+import api from "./axios";
+
+export const signup = async (credentials) => {
+  console.log(credentials);
+
+  const { data } = await api.post("/users/signup", credentials);
+  console.log(data);
+  return data;
+};
 
 export const login = async (credentials) => {
   console.log(credentials);
@@ -25,3 +33,8 @@ export const getUser = async () => {
   const { data } = await api.get("/users/get-user");
   return data;
 };
+
+export const logoutUser = async () => {
+  const {data} = await api.post("/users/logout");
+  return data;
+}

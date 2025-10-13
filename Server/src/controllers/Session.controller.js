@@ -41,7 +41,7 @@ const createSession = AsyncHandler(async (req, res) => {
     session.questions = questionIds;
     await session.save();
   }
-  return res.json(ApiResponse(200, "Session created successfully"));
+  return res.json(ApiResponse(200,session, "Session created successfully"));
 });
 
 const getMySessions = AsyncHandler(async (req, res) => {
@@ -57,18 +57,20 @@ const getMySessions = AsyncHandler(async (req, res) => {
 });
 
 const getSessionById = AsyncHandler(async (req, res) => {
-  const session = Session.findById(req.body?.id)
+  console.log(req.body.id);
+  const session = await Session.findById(req.body?.id)
     .populate({
       path: "questions",
       options: { sort: { isPinned: -1, createdAt: -1 } },
     })
     .exec();
+  console.log("session: ", session);
 
   if (!session) {
     throw CreateApiError(404, "Session not found");
   }
 
-  return res.json(ApiResponse(200, "fetched successfully"));
+  return res.json(ApiResponse(200, session, "fetched successfully"));
 });
 
 const deleteSessions = AsyncHandler(async (req, res) => {

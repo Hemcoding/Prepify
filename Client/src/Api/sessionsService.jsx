@@ -13,7 +13,15 @@ export const createSession = async (Inputs) => {
 };
 
 export const deleteSession = async (id) => {
-  console.log(id)
+  console.log(id);
   const { data } = await api.delete(`/sessions/delete-session/${id}`);
   return data;
+};
+
+export const fetchSessionById = async (id) => {
+  let obj = {
+    id,
+  };
+  const { data } = await api.post("/sessions/get-session", obj);
+  return data
 };

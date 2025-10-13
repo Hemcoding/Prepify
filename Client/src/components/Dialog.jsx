@@ -34,7 +34,7 @@ const CustomDialog = ({
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 pt-4">
-        <DialogTitle className="!p-0 text-lg font-semibold text-violet-600">
+        <DialogTitle className="!p-0 text-lg font-extrabold text-violet-600">
           {title}
         </DialogTitle>
         <IconButton onClick={onClose} className="text-gray-600 hover:text-red-500">

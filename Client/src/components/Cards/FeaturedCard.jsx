@@ -12,7 +12,7 @@ const FeaturedCard = ({ feature }) => {
         </div>
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-500/10 to-purple-600/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       </div>
-      <h3 className="text-2xl font-bold text-violet-500 mb-4 group-hover:scale-105 transition-transform duration-300 origin-left">
+      <h3 className="text-2xl font-bold text-gray-700 mb-4 group-hover:scale-105 transition-transform duration-300 origin-left">
         {feature.title}
       </h3>
       

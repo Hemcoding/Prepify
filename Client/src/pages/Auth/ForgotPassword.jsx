@@ -6,6 +6,7 @@ import { Button, TextField } from "@mui/material";
 import toast from "react-hot-toast";
 import { forgotPassword } from "../../Api/authService";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup
@@ -16,6 +17,7 @@ const schema = yup.object().shape({
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -102,6 +104,12 @@ const ForgotPassword = () => {
               "Send email"
             )}
           </Button>
+          <a
+            className="w-[95%] text-center rounded-xl px-4 sm:px-6 py-2 font-semibold text-violet-500 cursor-pointer hover:scale-105 active:scale-95 border-2 border-transparent hover:border-2 hover:border-violet-500"
+            onClick={() => navigate("/login")}
+          >
+            Back to Login
+          </a>
         </form>
       </div>
     </div>

@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import { CARD_BG } from "../../utils/data";
 import toast from "react-hot-toast";
-import DashboardLayout from "../../Components/layouts/DashboardLayout";
+import DashboardLayout from "../../components/layouts/DashboardLayout";
 import { useNavigate } from "react-router-dom";
-// import axiosInstance from '../../utils/axiosInstance'
-// import { API_PATHS } from '../../utils/apiPaths'
-import SummaryCard from "../../Components/Cards/SummaryCard";
+import SummaryCard from "../../components/Cards/SummaryCard";
 import moment from "moment";
-import Modal from "../../Components/Modal";
+import Modal from "../../components/Modal";
 import CreateSessionForm from "./CreateSessionForm";
-import DeleteAlertContent from "../../components/DeleteAlertContent";
+import Alert from "../../components/Alert";
 import Button1 from "../../components/Buttons/Button1";
 import CustomDialog from "../../components/Dialog";
 import { Button, CircularProgress } from "@mui/material";
 import { deleteSession, fetchAllSessions } from "../../Api/sessionsService";
+import { UserContext } from "../../context/userContext";
+import { MdAutoAwesome } from "react-icons/md";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -25,6 +25,10 @@ const Dashboard = () => {
     open: false,
     data: null,
   });
+  // const [openLogoutAlert, setOpenLogoutAlert] = useState(false);
+
+  // const { openLogoutAlert, setOpenLogoutAlert, handleLogout } =
+  //   useContext(UserContext);
 
   const fetchSessions = async () => {
     try {
@@ -49,6 +53,14 @@ const Dashboard = () => {
     }
   };
 
+  // const handleLogoutAndRedirect = () => {
+  //   const response = handleLogout();
+  //   setOpenLogoutAlert(false);
+  //   if (response.success) {
+  //     navigate("/login");
+  //   }
+  // };
+
   useEffect(() => {
     fetchSessions();
   }, []);
@@ -59,7 +71,7 @@ const Dashboard = () => {
       <div className="w-full pt-15 min-h-screen bg-gradient-to-br from-violet-200 to-white">
         <div className="container mx-auto pt-10 pb-20 px-6">
           {/* Title */}
-          <h1 className="text-2xl md:text-2xl font-bold text-violet-500 mb-10 text-center">
+          <h1 className="text-2xl md:text-2xl font-bold text-gray-900 mb-10 text-center">
             Your Interview Prep Sessions
           </h1>
 
@@ -79,7 +91,9 @@ const Dashboard = () => {
                       : ""
                   }
                   onSelect={() => navigate(`/interview-prep/${data?._id}`)}
-                  onDelete={() => setOpenDeleteAlert({ open: true, data: data._id })}
+                  onDelete={() =>
+                    setOpenDeleteAlert({ open: true, data: data._id })
+                  }
                   className="rounded-2xl shadow-lg border border-emerald-100 hover:shadow-xl hover:-translate-y-1 transition transform bg-white/90 backdrop-blur-md"
                 />
               </div>
@@ -98,17 +112,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Create Modal */}
-      {/* <Modal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        hideHeader
-      >
-        <div className="p-4">
-          <CreateSessionForm />
-        </div>
-      </Modal> */}
-
       <CustomDialog
         open={open}
         onClose={() => setOpen(false)}
@@ -124,7 +127,7 @@ const Dashboard = () => {
                 fullWidth
                 sx={{
                   backgroundColor: "#7F22FE",
-                  "&:hover": { backgroundColor: "#6d28d9" }, // darker violet
+                  "&:hover": { backgroundColor: "#6d28d9" },
                   color: "#fff",
                   borderRadius: "0.75rem",
                   padding: "0.75rem",
@@ -133,7 +136,10 @@ const Dashboard = () => {
                 }}
               >
                 {loading ? (
-                  <CircularProgress size={25} color="white" />
+                  <div className="inline-flex items-center gap-2 rounded-full text-white font-semibold text-sm shadow-sm animate-pulse">
+                    <MdAutoAwesome />
+                    <span className="font-bold"> AI is Generating...</span>
+                  </div>
                 ) : (
                   "Create session"
                 )}
@@ -160,9 +166,10 @@ const Dashboard = () => {
         title={"Delete Session"}
       >
         <div className="w-[90vw] md:w-[30vw]">
-          <DeleteAlertContent
+          <Alert
             content="Are you sure you want to delete this session?"
             onDelete={() => deleteSessionFromSessions(openDeleteAlert.data)}
+            buttonContent={"Delete"}
           />
         </div>
       </Modal>

@@ -13,6 +13,7 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-colors duration-500 ${

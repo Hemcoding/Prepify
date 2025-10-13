@@ -4,11 +4,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button, TextField } from "@mui/material";
 import toast from "react-hot-toast";
-import { resetPassword } from "../../Api/authService"; // <-- your API
+import { resetPassword } from "../../Api/authService";
 import { useParams, useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
-// ✅ Validation Schema
+// Validation Schema
 const schema = yup.object().shape({
   password: yup
     .string()
@@ -22,7 +22,7 @@ const schema = yup.object().shape({
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
-  const { token } = useParams(); // get token from url
+  const { token } = useParams(); 
   const navigate = useNavigate();
 
   const {
@@ -37,14 +37,14 @@ const ResetPassword = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await resetPassword(token, data); // API call
+      const response = await resetPassword(token, data); 
       console.log(response);
       
       setLoading(false);
 
       if (response.success) {
         toast.success(response.data || "Password reset successfully!");
-        navigate("/login"); // redirect to login after reset
+        navigate("/login"); 
         reset();
       }
     } catch (error) {

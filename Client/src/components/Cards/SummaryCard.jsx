@@ -1,14 +1,14 @@
-import React from 'react'
-import { LuTrash2 } from 'react-icons/lu';
-import { getInitials } from '../../utils/helper';
+import React from "react";
+import { LuTrash2 } from "react-icons/lu";
+import { getInitials } from "../../utils/helper";
 
 const SummaryCard = ({
   colors,
   role,
   topicsToFocus,
   experience,
-  questions, 
-  description,   
+  questions,
+  description,
   lastUpdated,
   onSelect,
   onDelete,
@@ -19,14 +19,13 @@ const SummaryCard = ({
       onClick={onSelect}
     >
       {/* Top Colored Header */}
-      {console.log(colors.bgcolor)}
       <div
-        className={`bg-${colors.bgcolor} rounded-t-2xl p-4 relative`}
-        
+        className={`rounded-t-2xl p-4 relative`}
+        // style={{ background:  "#E3D3FF"}}
       >
         <div className="flex items-start">
           {/* Initials */}
-          <div className="flex-shrink-0 w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow">
+          <div className="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center shadow" style={{ background: colors?.bgcolor,  border: `1px solid ${colors?.borderColor || "#ccc"}`}}>
             <span className="text-lg font-semibold text-gray-800">
               {getInitials(role)}
             </span>
@@ -34,21 +33,35 @@ const SummaryCard = ({
 
           {/* Title + Skills */}
           <div className="ml-3 flex-grow text-white">
-            <h2 className="text-[17px] font-semibold leading-snug text-gray-800">{role}</h2>
-            <p className="text-xs font-medium opacity-90 text-gray-800" >{topicsToFocus}</p>
+            <h2 className="text-[17px] font-semibold leading-snug text-gray-800">
+              {role}
+            </h2>
+            <p className="text-xs font-medium opacity-90 text-gray-800">
+              {topicsToFocus}
+            </p>
           </div>
         </div>
 
-        {/* Delete button */}
+        {/* Delete Button */}
         <button
-          className="block md:hidden group-hover:flex items-center gap-1 text-xs text-white bg-rose-500/90 px-2.5 py-1 rounded-md shadow hover:bg-rose-600 absolute top-3 right-3"
+          className="
+            absolute top-3 right-3 
+            flex items-center justify-center gap-1 
+            bg-rose-500/90 hover:bg-rose-600 
+            text-white text-xs font-medium rounded-md 
+            shadow px-2.5 py-1 
+            transition-all duration-200
+            md:hidden      
+            lg:hidden
+            group-hover:flex lg:flex lg:opacity-0 lg:group-hover:opacity-100
+          "
           onClick={(e) => {
             e.stopPropagation();
             onDelete();
           }}
         >
-          <LuTrash2 size={14} />
-          Delete
+          <LuTrash2 size={14} className="inline-block" />
+          <span className="hidden lg:inline-block">Delete</span>
         </button>
       </div>
 
@@ -57,7 +70,7 @@ const SummaryCard = ({
         {/* Badges */}
         <div className="flex flex-wrap gap-2 mt-4">
           <span className="text-[11px] font-medium text-gray-800 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
-            Experience: {experience} {experience == 1 ? 'Year' : 'Years'}
+            Experience: {experience} {experience == 1 ? "Year" : "Years"}
           </span>
           <span className="text-[11px] font-medium text-gray-800 bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
             {questions} Q&A

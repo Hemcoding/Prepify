@@ -6,12 +6,12 @@ const Modal = ({ children, isOpen, onClose, title, hideHeader }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black/50 backdrop-blur-sm">
       {/* Modal content */}
-      <div className="relative flex flex-col w-[90%] max-w-lg bg-white/95 shadow-2xl rounded-2xl overflow-hidden border border-emerald-100">
+      <div className="relative flex flex-col w-[90%] max-w-lg bg-white/95 shadow-2xl rounded-2xl overflow-hidden border border-violet-100">
         
         {/* Modal header */}
         {!hideHeader && (
           <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
-            <h3 className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-sky-600 bg-clip-text text-transparent">
+            <h3 className="text-xl font-bold text-violet-500 bg-clip-text text-transparent">
               {title}
             </h3>
           </div>
@@ -20,7 +20,7 @@ const Modal = ({ children, isOpen, onClose, title, hideHeader }) => {
         {/* Close button */}
         <button
           type="button"
-          className="absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 transition-colors"
+          className="absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center rounded-full bg-violet-500/10 hover:bg-violet-500/20 text-violet-600 transition-colors"
           onClick={onClose}
         >
           <svg

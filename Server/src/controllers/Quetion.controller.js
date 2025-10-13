@@ -25,7 +25,7 @@ const addQuestionsToSession = AsyncHandler(async(req, res) => {
         }))
     )
 
-    session.questions.push(...createdQuestions.map(q._id));
+    session.questions.push(...createdQuestions.map(q => q._id));
     await session.save()
 
     return res.json(ApiResponse(200,createdQuestions, "Questions created successfully"))

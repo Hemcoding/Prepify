@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api/v1",
-  timeout: 10000,
+  baseURL: import.meta.env.VITE_APP_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -22,9 +21,6 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        // if(error.response?.status === 401) {
-
-        // }
         return Promise.reject(error)
     }
 )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DeleteAlertContent = ({content, onDelete}) => {
+const Alert = ({content, onDelete, buttonContent}) => {
   return (
     <div className='p-5'>
         <p className='text-[14px]'>{content}</p>
@@ -10,11 +10,11 @@ const DeleteAlertContent = ({content, onDelete}) => {
                 className='btn-small'
                 onClick={onDelete}
             >
-                Delete
+                {buttonContent}
             </button>
         </div>
     </div>
   )
 }
 
-export default DeleteAlertContent
+export default Alert

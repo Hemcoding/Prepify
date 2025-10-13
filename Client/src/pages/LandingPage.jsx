@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button1 from "../components/Buttons/Button1.jsx";
 import Button2 from "../components/Buttons/Button2.jsx";
-import heroImage from "../assets/Images/poster.png";
+import desktopView from "../assets/Images/desktop_view.png";
 import { APP_FEATURES } from "../utils/data";
 import FeaturedCard from "../components/Cards/FeaturedCard.jsx";
 import { MdAutoAwesome } from "react-icons/md";
@@ -54,7 +54,6 @@ const LandingPage = () => {
       <section className="bg-radial from-violet-200 from-20% to-white w-full py-28 md:py-40 px-4">
         <div className="flex flex-col items-center text-center w-full">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-100 text-violet-600 font-semibold text-sm shadow-sm border border-violet-200 animate-pulse">
-            {/* <span className="w-2 h-2 bg-violet-500 rounded-full animate-ping"></span> */}
             <MdAutoAwesome />
             <span className="font-bold"> AI Powered</span>
           </div>
@@ -73,20 +72,21 @@ const LandingPage = () => {
           <p className="text-lg sm:text-xl mb-5 text-gray-600">
             tailored to your role.
           </p>
-          <Button1 className="m-5" children="Get Started" />
+          <Button1 className="m-5" children="Get Started" onClick={() => navigate("/login")} />
         </div>
       </section>
 
       <section className="relative flex justify-center -mt-10 sm:-mt-20 px-4">
+        {/* Main background image */}
         <img
-          className="w-full sm:w-[80%] md:w-[70%] lg:w-[70%] rounded-2xl border-2 border-violet-200 shadow-lg"
-          src={heroImage}
-          alt="HeroImage"
+          className="w-full sm:w-[80%] md:w-[70%] rounded-2xl border-4 border-black shadow-lg"
+          src={desktopView}
+          alt="Desktop application view"
         />
       </section>
 
       <section className="flex flex-col items-center bg-gradient-to-b from-white via-violet-100 to-white py-20 px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-violet-500 mb-14">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800 mb-14">
           Features that make you stand out
         </h2>
 
@@ -102,7 +102,7 @@ const LandingPage = () => {
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
             Ready to crack your next interview?
           </h1>
-          <Button2 children="Get Started" color="white" textColor="violet" />
+          <Button2 children="Get Started" color="white" textColor="violet" onClick={() => navigate("/login")} />
         </div>
       </section>
 

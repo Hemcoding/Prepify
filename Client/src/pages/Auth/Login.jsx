@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -11,6 +11,7 @@ import { MdOutlineVisibilityOff } from "react-icons/md";
 import { login } from "../../Api/authService";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { UserContext } from "../../context/userContext";
 
 // ✅ Validation Schema
 const schema = yup.object().shape({
@@ -27,8 +28,11 @@ const schema = yup.object().shape({
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState("")
 
   const navigate = useNavigate();
+
+  const { setUser } = useContext(UserContext);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -56,11 +60,13 @@ const Login = () => {
       console.log("response", response);
 
       if (response.success) {
+        setUser(response.data.user);
         setLoading(false);
         toast.success("Logged in successfully! 🎉");
         navigate("/dashboard");
       }
     } catch (error) {
+      // setError(error.response.data.message)
       toast.error(error.response?.data.message || "Somthing went wrong");
       console.log(error);
       // setError(error)
@@ -72,6 +78,7 @@ const Login = () => {
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
         {/* Left Side Illustration */}
         <div className="flex justify-center items-center">
+          {/* {error} */}
           <Lottie
             animationData={AiBot}
             loop={true}
@@ -168,7 +175,7 @@ const Login = () => {
             <div className="flex justify-end w-full">
               <a
                 onClick={() => navigate("/forgot-password")}
-                className="text-md font-medium text-violet-500 hover:underline"
+                className="text-md cursor-pointer font-medium text-violet-500 hover:underline"
               >
                 Forgot password?
               </a>
@@ -190,6 +197,15 @@ const Login = () => {
             >
               Login
             </Button>
+            <div className="flex flex-col items-center">
+              <p>Don't have an account ?</p>
+              <a
+                className="w-[95%] text-center rounded-xl px-4 sm:px-6 py-2 font-semibold text-violet-500 cursor-pointer hover:scale-105 active:scale-95"
+                onClick={() => navigate("/signup")}
+              >
+                Sign Up
+              </a>
+            </div>
           </form>
         </div>
       </div>
